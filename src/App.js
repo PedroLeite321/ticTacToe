@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react";
+import "./App";
 
-function App() {
+function Square( {value, onSquareClick} ) {
+
+  return(
+    <button onClick={ onSquareClick } className="square">{ value }</button>
+  )
+}
+export default function Board() {
+  const [square, setSquare] = useState(Array(9).fill(""))
+
+  const fillSquare = ( i ) =>  {
+    const nextSquares = square.slice();
+    nextSquares[i] = "X";
+    setSquare(nextSquares);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="board-row">
+          <Square value={square[0]} onSquareClick={() => fillSquare(0)}/>
+          <Square value={square[1]} onSquareClick={() => fillSquare(1)}/>
+          <Square value={square[2]} onSquareClick={() => fillSquare(2)}/>
+        </div>
+        <div className="board-row">
+          <Square value={square[3]} onSquareClick={() => fillSquare(3)}/>
+          <Square value={square[4]} onSquareClick={() => fillSquare(4)}/>
+          <Square value={square[5]} onSquareClick={() => fillSquare(5)}/>
+        </div>
+        <div className="board-row">
+          <Square value={square[6]} onSquareClick={() => fillSquare(6)}/>
+          <Square value={square[7]} onSquareClick={() => fillSquare(7)}/>
+          <Square value={square[8]} onSquareClick={() => fillSquare(8)}/>
+        </div>
     </div>
-  );
+  )
 }
-
-export default App;
